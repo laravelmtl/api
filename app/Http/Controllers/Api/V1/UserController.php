@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,28 +17,19 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return \App\User::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param UserRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        return \App\User::create($request->only('name', 'email'));
     }
 
     /**
@@ -48,30 +40,25 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return \App\User::findOrFail($id);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param UserRequest $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        $user = \App\User::findOrFail($id);
+
+        $user->fill($request->only('name', 'email'));
+
+        $user->save();
+
+        return $user;
     }
 
     /**
@@ -82,6 +69,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return \App\User::destroy($id);
     }
 }
