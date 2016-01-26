@@ -18,6 +18,6 @@ Route::get('/', function () {
 
 $api = app('Dingo\Api\Routing\Router');
 
-$api->version('v1', function ($api) {
+$api->version('v1', ['middleware' => 'api.auth'], function ($api) {
     $api->resource('users', 'App\Http\Controllers\Api\V1\UserController');
 });
