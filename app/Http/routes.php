@@ -19,5 +19,5 @@ Route::get('/', function () {
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', function ($api) {
-    $api->resource('users', 'App\Api\Controllers\UserController');
+    $api->resource('users', 'App\Http\Controllers\Api\V1\UserController');
 });
