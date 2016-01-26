@@ -29,6 +29,10 @@ $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
     $api->resource('users', 'App\Http\Controllers\Api\V1\UserController');
 });
 
+$api->version('v2', ['middleware' => 'api.auth'], function ($api) {
+    $api->resource('users', 'App\Http\Controllers\Api\V2\UserController');
+});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -42,4 +46,10 @@ $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
 Route::post('login', [
     'prefix'    => "api",
     'uses'      => 'AuthenticateController@authenticate',
+]);
+
+Route::get('refresh', [
+    'prefix'    => "api",
+    'middleware'=> ["jwt.auth", "jwt.refresh"],
+    'uses'      => 'AuthenticateController@validateToken',
 ]);
