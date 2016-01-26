@@ -46,7 +46,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return \App\User::findOrFail($id);
+        return $this->response->item(\App\User::findOrFail($id), new UserTransformer());
     }
 
     /**
