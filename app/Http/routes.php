@@ -15,9 +15,31 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+/*
+|--------------------------------------------------------------------------
+| Api Routes
+|--------------------------------------------------------------------------
+|
+| Dingo Api has it's own router, so make sure you use it...
+|
+*/
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
     $api->resource('users', 'App\Http\Controllers\Api\V1\UserController');
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| JWT Routes
+|--------------------------------------------------------------------------
+|
+| Generates and validates tokens for api use
+|
+*/
+
+Route::post('login', [
+    'prefix'    => "api",
+    'uses'      => 'AuthenticateController@authenticate',
+]);

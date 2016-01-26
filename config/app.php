@@ -148,8 +148,8 @@ return [
         /*
          * Dingo Api Service Provider
          */
-        Dingo\Api\Provider\LaravelServiceProvider::class
-
+        Dingo\Api\Provider\LaravelServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class
     ],
 
     /*
@@ -204,6 +204,7 @@ return [
          */
         'DingoAPI'  => Dingo\Api\Facade\API::class,
         'DingoRoute'=> Dingo\Api\Facade\Route::class,
+        'JWTAuth'   => Tymon\JWTAuth\Facades\JWTAuth::class
 
     ],
 
