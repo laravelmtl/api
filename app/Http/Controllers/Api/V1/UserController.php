@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+
+/**
+ * User resource representation. Version 1
+ *
+ * @Resource("Users", uri="/users")
+ */
 class UserController extends Controller
 {
     /**

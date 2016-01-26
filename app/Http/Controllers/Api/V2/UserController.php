@@ -10,14 +10,24 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Dingo\Api\Routing\Helpers;
 
+/**
+ * User resource representation. Version 2
+ *
+ * @Resource("Users", uri="/users")
+ */
 class UserController extends Controller
 {
     use Helpers;
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the users.
      *
+     * @Get("/")
+     * @Versions({"v2"})
      * @return \Illuminate\Http\Response
+     * @Parameters({
+     *      @Parameter("include", description="The entities to load per listing.", default=false),
+     * })
      */
     public function index()
     {
@@ -32,6 +42,10 @@ class UserController extends Controller
      *
      * @param UserRequest $request
      * @return \Illuminate\Http\Response
+     * @Post("/")
+     * @Versions({"v2"})
+     * @Request("username=foo&email=valid@email.com", contentType="application/x-www-form-urlencoded")
+     * @Response(200, body={"id": 10, "username": "foo", "email": "valid@email.com"})
      */
     public function store(UserRequest $request)
     {
